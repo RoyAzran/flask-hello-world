@@ -26,6 +26,7 @@ pipeline {
                         
                         docker tag roy-repo:latest 992382545251.dkr.ecr.us-east-1.amazonaws.com/roy-repo:latest
                         docker push 992382545251.dkr.ecr.us-east-1.amazonaws.com/roy-repo:latest
+                        docker run --rm -d -p 5000:5000 992382545251.dkr.ecr.us-east-1.amazonaws.com/roy-repo:latest
                     """
                 }
             }
