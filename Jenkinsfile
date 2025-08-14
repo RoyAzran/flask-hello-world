@@ -1,5 +1,5 @@
 pipeline {
-    stages {
+    agent any {
         stage('Checkout') {
             steps {
                 git 'https://github.com/RoyAzran/flask-hello-world.git' 
