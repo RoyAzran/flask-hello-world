@@ -1,10 +1,13 @@
 pipeline {
-    agent any {
+    agent any
+    
+    stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/RoyAzran/flask-hello-world.git' 
+                git 'https://github.com/RoyAzran/flask-hello-world.git'
             }
         }
+        
         stage('Build Docker Image') {
             steps {
                 script {
