@@ -1,13 +1,7 @@
-FROM python:latest
-
-WORKDIR .
-
-copy requirements.txt .
-
-RUN pip install -r requirements.txt
-
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-
 EXPOSE 5000
-
-CMD ["python" , "hello.py"] 
+CMD ["python", "app.py"]
