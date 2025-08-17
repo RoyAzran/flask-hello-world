@@ -22,9 +22,8 @@ pipeline {
         stage('deploy application to container') {
             steps {
                 script {
-                    sh """
-                        docker rm $(docker ps -a -q)
-                        docker run --rm -d -p 5000:5000 roy-repo 
+                    sh """docker rm $(docker ps -a -q) 
+                    docker run --rm -d -p 5000:5000 roy-repo 
                     """
                 }
             }
