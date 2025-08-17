@@ -22,7 +22,7 @@ pipeline {
         stage('deploy application to container') {
             steps {
                 script {
-                    sh """docker rm $(docker ps -a -q) 
+                    sh """ docker ps -aq | xargs docker rm -f
                     docker run --rm -d -p 5000:5000 roy-repo 
                     """
                 }
