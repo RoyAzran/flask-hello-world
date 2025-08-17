@@ -8,7 +8,7 @@ def health():
 
 @app.get("/")
 def home():
-    return "Hello CI/CD ROYYYYYYYYYY", 200
+    return "Hello CI/CD ROYYYYY", 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
