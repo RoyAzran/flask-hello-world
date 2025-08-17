@@ -8,25 +8,23 @@ pipeline {
             }
         }
         
-        stage('Build Docker Image') {
+        stage('connect to ECR and push image to ecr ') {
             steps {
                 script {
-                     sh "docker build -t roy-repo:latest ."
+                     sh """aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382545251.dkr.ecr.us-east-1.amazonaws.com 
+                         docker build -t roy-repo . 
+                         docker tag roy-repo:latest 992382545251.dkr.ecr.us-east-1.amazonaws.com/roy-repo:latest
+                         docker push 992382545251.dkr.ecr.us-east-1.amazonaws.com/roy-repo:latest  """
                 }
             }
         }
         
-        stage('Push Image to ECR') {
+        stage('deploy application to container') {
             steps {
                 script {
-                    // Authenticate to ECR
                     sh """
-                        aws ecr get-login-password --region us-east-1 \
-                        | docker login --username AWS --password-stdin 992382545251.dkr.ecr.us-east-1.amazonaws.com
-                        
-                        docker tag roy-repo:latest 992382545251.dkr.ecr.us-east-1.amazonaws.com/roy-repo:latest
-                        docker push 992382545251.dkr.ecr.us-east-1.amazonaws.com/roy-repo:latest
-                        docker run --rm -d -p 5000:5000 992382545251.dkr.ecr.us-east-1.amazonaws.com/roy-repo:latest
+                      
+                        docker run --rm -d -p 5000:5000 roy-repo 
                     """
                 }
             }
